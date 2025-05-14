@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Markdown在线编辑器
 
-## Getting Started
+一个简洁、现代的Markdown在线编辑器，支持实时预览和响应式设计。
 
-First, run the development server:
+## 功能特点
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 简洁现代的UI设计
+- 实时Markdown预览
+- 代码语法高亮
+- 响应式设计，支持手机和桌面设备
+- 本地存储，自动保存编辑内容
+- 支持复制和清除功能
+
+## 技术栈
+
+- 前端：HTML5, SCSS, JavaScript
+- 后端：Node.js, Express
+- 工具：marked.js (Markdown解析), highlight.js (代码高亮)
+
+## 安装和使用
+
+1. 克隆仓库：
+```
+git clone https://github.com/blankzsh/markdown-editor.git
+cd markdown-editor
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. 安装依赖：
+```
+pnpm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. 启动开发服务器：
+```
+pnpm run dev:all
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. 访问 `http://localhost:3000` 开始使用编辑器
 
-## Learn More
+## 生产环境部署
 
-To learn more about Next.js, take a look at the following resources:
+1. 编译Sass文件：
+```
+pnpm run sass
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. 启动服务器：
+```
+pnpm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 许可证
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ISC 

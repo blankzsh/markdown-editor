@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown在线编辑器</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/atom-one-dark.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-area">
+        <span class="logo-icon">📝</span>
+        <h1>Markdown编辑器</h1>
+      </div>
+      <div class="actions">
+        <button id="themeToggle" title="切换主题" class="icon-btn">
+          <span class="material-icons">dark_mode</span>
+        </button>
+        <button id="fullscreenBtn" title="全屏模式" class="icon-btn">
+          <span class="material-icons">fullscreen</span>
+        </button>
+        <button id="copyBtn" title="复制Markdown内容">复制</button>
+        <button id="clearBtn" title="清除内容">清除</button>
+      </div>
+    </header>
+    
+    <main>
+      <div class="editor-container">
+        <div class="editor-toolbar">
+          <button data-action="heading" title="标题" class="toolbar-btn">
+            <span class="material-icons">title</span>
+          </button>
+          <button data-action="bold" title="粗体" class="toolbar-btn">
+            <span class="material-icons">format_bold</span>
+          </button>
+          <button data-action="italic" title="斜体" class="toolbar-btn">
+            <span class="material-icons">format_italic</span>
+          </button>
+          <button data-action="quote" title="引用" class="toolbar-btn">
+            <span class="material-icons">format_quote</span>
+          </button>
+          <button data-action="code" title="代码" class="toolbar-btn">
+            <span class="material-icons">code</span>
+          </button>
+          <button data-action="link" title="链接" class="toolbar-btn">
+            <span class="material-icons">link</span>
+          </button>
+          <button data-action="image" title="图片" class="toolbar-btn">
+            <span class="material-icons">image</span>
+          </button>
+          <button data-action="list-ul" title="无序列表" class="toolbar-btn">
+            <span class="material-icons">format_list_bulleted</span>
+          </button>
+          <button data-action="list-ol" title="有序列表" class="toolbar-btn">
+            <span class="material-icons">format_list_numbered</span>
+          </button>
+        </div>
+        <textarea id="editor" placeholder="在此输入Markdown内容..." autofocus></textarea>
+      </div>
+      <div class="preview-container">
+        <div class="preview-toolbar">
+          <span class="word-count">0 字</span>
+          <div class="preview-options">
+            <button id="syncScroll" title="同步滚动" class="toggle-btn active">
+              <span class="material-icons">sync</span>
+            </button>
+            <button id="previewToggle" title="预览模式" class="toggle-btn">
+              <span class="material-icons">visibility</span>
+            </button>
+          </div>
+        </div>
+        <div id="preview"></div>
+      </div>
+    </main>
+    
+    <footer>
+      <p>简单高效的Markdown编辑器 &copy; 2024</p>
+      <div class="footer-links">
+        <a href="https://github.com/" target="_blank" rel="noopener" title="GitHub">
+          <span class="material-icons">code</span>
+        </a>
+        <button id="helpBtn" title="使用帮助">
+          <span class="material-icons">help_outline</span>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 帮助对话框 -->
+  <div id="helpDialog" class="dialog">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h3>Markdown 语法帮助</h3>
+        <button class="close-dialog">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <div class="help-section">
+          <h4>基本语法</h4>
+          <table class="help-table">
+            <tr>
+              <td><code># 标题</code></td>
+              <td>一级标题</td>
+            </tr>
+            <tr>
+              <td><code>## 标题</code></td>
+              <td>二级标题</td>
+            </tr>
+            <tr>
+              <td><code>**文本**</code></td>
+              <td>粗体</td>
+            </tr>
+            <tr>
+              <td><code>*文本*</code></td>
+              <td>斜体</td>
+            </tr>
+            <tr>
+              <td><code>[链接](URL)</code></td>
+              <td>超链接</td>
+            </tr>
+            <tr>
+              <td><code>![替代文本](图片URL)</code></td>
+              <td>图片</td>
+            </tr>
+            <tr>
+              <td><code>- 列表项</code></td>
+              <td>无序列表</td>
+            </tr>
+            <tr>
+              <td><code>1. 列表项</code></td>
+              <td>有序列表</td>
+            </tr>
+            <tr>
+              <td><code>> 引用内容</code></td>
+              <td>引用</td>
+            </tr>
+            <tr>
+              <td><code>```代码```</code></td>
+              <td>代码块</td>
+            </tr>
+            <tr>
+              <td><code>---</code></td>
+              <td>水平线</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button class="close-dialog-btn">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html> 
